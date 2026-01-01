@@ -59,7 +59,7 @@ class main():
         except requests.exceptions.ConnectionError as f:
             self.Logging("Fail")
         except InvalidStatus as g:
-            self.Logging("Custom","A status was not found! is it a successful get request or a failed one?","Error")
+            self.Logging("Custom","A status was not found","Error")
             return 
         except ZeroWallpapers as e:
             self.Logging("Custom","Zero wallpapers found in chosen dir/condition, are there any wallpapers in mind?", "Warn")
