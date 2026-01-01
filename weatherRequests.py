@@ -108,6 +108,6 @@ class main():
         return self.currentFiles
     
     def applytheme(self, logging: bool = False) -> None:
-        pass
+        pass #use gum to ask them if they want to run pywal and perform changes to the colorscheme, ofcourse after we randomize the list of files in self.allfiles
 
 X = main()
