@@ -33,8 +33,6 @@ class main():
              os.system(f"cd utils && go run logging.go {Status}")
         elif Status == "Custom" and (type(Status) == str):
              os.system(f'cd utils && go run logging.go {Status} "{CustomMsg}" {Severity}')
-        else:
-            raise InvalidStatus()
 
     def __init__(self, logging: bool = False) -> None:
         self._URL_Json: str = "https://wttr.in/?format=j1"
