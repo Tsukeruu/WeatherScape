@@ -109,6 +109,6 @@ class main():
         return self.currentFiles
     
     def applytheme(self, logging: bool = False) -> None:
-        pass #use gum to ask them if they want to run pywal and perform changes to the colorscheme, ofcourse after we randomize the list of files in self.allfiles
+        pass #2 modes, cli mode and rofi dmenu mode if you want
 
 X = main()
