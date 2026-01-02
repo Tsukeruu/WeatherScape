@@ -91,7 +91,7 @@ class main():
 
     def navigation(self, currentCondition: str, logging: bool = False) -> str:
         if logging == True:
-            self.Logging("Custom", "Navigating through conditions!", "Debug")
+            self.Logging("Custom", "Navigating through conditions...", "Debug")
         return f"{self.currentDir}/wallpapers/{currentCondition}"
 
     def returnFiles(self, logging: bool = False) -> List[Union[str, None]]:
