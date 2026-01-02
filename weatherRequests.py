@@ -36,8 +36,8 @@ class main():
             raise InvalidStatus()
 
     def __init__(self, logging: bool = False) -> None:
-        self.URL_Json: str = "https://wttr.in/?format=j1"
-        self.WeatherCodes: Dict[str, Dict[int]]  = {
+        self._URL_Json: str = "https://wttr.in/?format=j1"
+        self._WeatherCodes: Dict[str, Dict[int]]  = {
         "clear": {113},
         "partly_cloudy": {116},
         "cloudy": {119, 122},
@@ -53,7 +53,7 @@ class main():
         self.currentDir = os.getcwd()
         try:
             self.Weather: List[Any] = self.makeRequest(True)
-            self.Condition = self.classify(self.Weather[-1])
+            self.Condition = self.classify(self.Weather[-1], True)
             self.Logging("Success")
             print(self.returnFiles(True))
         except requests.exceptions.ConnectionError as f:
@@ -67,7 +67,9 @@ class main():
             self.Logging("Custom","The weather code provided is not correct, are you even on earth?", "Error")
 
     def classify(self, code: int, logging = False) -> str:
-        for condition, codes in self.WeatherCodes.items():
+        if logging == True:
+            self.Logging("Custom", "Finding condition via given weather code...", "Debug")
+        for condition, codes in self._WeatherCodes.items():
             if code in codes:
                 return condition
 
@@ -77,7 +79,7 @@ class main():
         if logging == True:
             self.Logging("Custom","Attempting to do a GET request towards wttr.in!","Debug")
         data: List[Any] = []
-        self.WeatherData = requests.get(self.URL_Json).json()
+        self.WeatherData = requests.get(self._URL_Json).json()
         self.AreaName: str = self.WeatherData["nearest_area"][0]["areaName"][0]["value"]
         self.currentWeather: str = self.WeatherData["current_condition"][0]["weatherDesc"][0]["value"]
         self.Temp_C: int = self.WeatherData["current_condition"][0]["FeelsLikeC"]
@@ -100,7 +102,7 @@ class main():
         self.allFiles: str = os.listdir(self.chosenDir)
         for file in self.allFiles:
             self.currentFiles.append(file)
-        if self.currentFiles == []:
+        if not self.currentFiles:
             raise ZeroWallpapers()
         else:
             self.Logging("Custom",f"Found ({len(self.currentFiles)})! wallpapers for {self.Condition}","Info")
