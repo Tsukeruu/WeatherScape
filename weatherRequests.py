@@ -3,6 +3,7 @@ Dependencies to install:
     Charmbracelets log library
     golang
     pywal
+    hyprshot or swww
     (Use docker for efficient management?)
 """
 
