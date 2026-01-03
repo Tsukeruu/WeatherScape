@@ -3,7 +3,8 @@ Dependencies to install:
     Charmbracelets log library
     golang
     pywal
-    hyprshot or swww
+    swww
+    #2 modes, cli mode and rofi dmenu mode if you want
     (Use docker for efficient management?)
 """
 
@@ -36,7 +37,9 @@ class main():
 
     def __init__(self, logging: bool = False) -> None:
         self._URL_Json: str = "https://wttr.in/?format=j1"
-        self._WeatherCodes: Dict[str, Dict[int]]  = {
+        self._swww_duration: int = 1.5
+        self._swww_transition: str = "fade"
+        self._WeatherCodes: Dict[str, Dict[int]] = {
         "clear": {113},
         "partly_cloudy": {116},
         "cloudy": {119, 122},
@@ -55,6 +58,7 @@ class main():
             self.Condition = self.classify(self.Weather[-1], True)
             self.Logging("Success")
             print(self.returnFiles(True))
+            self.applyWal(True) 
         except requests.exceptions.ConnectionError as f:
             self.Logging("Fail")
         except InvalidStatus as g:
@@ -107,8 +111,27 @@ class main():
             self.Logging("Custom",f"Found ({len(self.currentFiles)})! wallpapers for {self.Condition}","Info")
 
         return self.currentFiles
-    
-    def applytheme(self, logging: bool = False) -> None:
-        pass #2 modes, cli mode and rofi dmenu mode if you want
+   
+    def returnRandomWallpaper(self, logging: bool = False) -> None:
+        if logging == True:
+            self.Logging("Custom","Returning a random wallpaper...","Debug")
+        self.Randomizedwallpaper = random.choice(self.currentFiles)
+        return self.Randomizedwallpaper
+
+    def setWallpaper(self, logging: bool = False, wallpapermnger: str = "swww") -> None: 
+        if logging == True:
+            self.Logging("Custom",f"Using {wallpapermnger} to set the wallpaper...", "Debug") 
+        selectedWallpaper = self.returnRandomWallpaper(True)
+        randomizedWalPath = f"wallpapers/{self.Condition}/{selectedWallpaper}"
+        os.system(f"{wallpapermnger} img wallpapers/{self.Condition}/{selectedWallpaper} --transition-type {self._swww_transition} --transition-duration {self._swww_duration}")
+        return randomizedWalPath
+
+    def applyWal(self, logging: bool = False) -> None:
+        randomizedWalPath_ = self.setWallpaper(True) 
+        if logging == True:
+            self.Logging("Custom","Applying colorscheme...","Debug")
+        os.system(f"wal -i {randomizedWalPath_}")
 
 X = main()
+
+#Add changes to hyprlock and restart eww bar
