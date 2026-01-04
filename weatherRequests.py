@@ -14,6 +14,7 @@ import requests
 import os
 import random
 import subprocess
+import configparser
 
 T = TypeVar("T")
 
@@ -193,3 +194,5 @@ X = main()
 
 #Add notify-send
 #In the future (tomorrow or late today) look at ways to improve and modulize it
+#Use configparser and make an ini config file
+#Make this modular by dividing up the classes into seperate files and making it cleaner
