@@ -65,19 +65,15 @@ class main():
             self.applyWal(True) 
         except requests.exceptions.ConnectionError as f:
             self.Logging("Fail")
-            return
         except InvalidStatus as g:
             self.Logging("Custom","A status was not found","Error")
             return 
         except ZeroWallpapers as e:
             self.Logging("Custom","Zero wallpapers found in chosen dir/condition, are there any wallpapers in mind?", "Warn")
-            return
         except InvalidCode as h:
             self.Logging("Custom","The weather code provided is not correct, are you even on earth?", "Error")
-            return
         except WalFailed as j:
             self.Logging("Custom","Fail; No image found!","Error")  
-            return
 
     def classify(self, code: int, logging = False) -> str:
         if logging == True:
@@ -157,7 +153,7 @@ class main():
             randomizedWalPath_: str = self.setWallpaper(True) 
         except SwwwFailed as g:
             self.Logging("Custom","Unable to run swww!","Error")
-            return
+
         if logging == True:
             self.Logging("Custom","Applying colorscheme...","Debug")
         else:
@@ -190,6 +186,57 @@ class main():
 
 X = main()
 
-
+#Add changes to hyprlock and restart eww bar
+#Add custom errors for sww and pywal
 #Add notify-send
 #In the future (tomorrow or late today) look at ways to improve and modulize it
+
+
+hyprLock="$HOME/.config/hypr/hyprlock.conf"
+
+main() {
+  sed -i -e "s|path = .*|path = $currentDir/wallpapers/$condition/$chosenImage|" $hyprLock
+}
+
+if [[ $1 = "Eww" ]]; then
+ killall eww && eww open-many bar notifications
+fi
+
+if [[ $1 = "hyprLock" ]]; then
+  chosenImage=$2
+  condition=$3
+  currentDir=$4
+  main
+fi 
+
+class InvalidCode(Exception):
+    def __init__(self, code: int, message: str = None) -> None:
+        if message == None:
+            message = f"Invalid weather code for {code}"
+        super().__init__(message)
+
+class InvalidStatus(Exception):
+    def __init__(self, message: str = None) -> None:
+        if message == None: 
+            message = "Unable to understand status provided!"
+        super().__init__(message)
+
+class ZeroWallpapers(Exception):
+    def __init__(self, message: str = None) -> None:
+        if message == None:
+            message = "No wallpapers found in chosen dir/condition"
+        super().__init__(message)
+
+class WalFailed(Exception):
+    def __init__(self, message: str = None) -> None:
+        if message == None:
+            message = "Pywal failed to execute"
+
+        super().__init__(message)
+
+class SwwwFailed(Exception):
+    def __init__(self, message: str = None) -> None:
+        if message == None:
+            message = "Swww failed to set the wallpaper!"
+
+        super().__init__(message)
