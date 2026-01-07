@@ -5,11 +5,12 @@ Dependencies to install:
     pywal
     swww
     #2 modes, cli mode and rofi dmenu mode if you want
-    (Use docker for efficient management?)
 """
 
-from typing import List, Generic, TypeVar, Dict, Any, Union
+from typing import List, Generic, TypeVar, Dict, Any, Union, ClassVar, Set
+from dataclasses import dataclass
 from utils.pyUtils.Exceptions import InvalidCode, InvalidStatus, ZeroWallpapers, SwwwFailed, WalFailed
+from utils.pyUtils.Dataclasses import ConfigInit
 import requests
 import os
 import random
@@ -27,7 +28,7 @@ A valid way to write the logging modes is this:
    Those default loggers usually have a description of what is currently being done
 """
 
-class main():
+class main(ConfigInit):
     @staticmethod
     def Logging(Status: T, CustomMsg = None, Severity = None) -> None:
         if Status == "Success" and (type(Status) == str):
@@ -38,47 +39,6 @@ class main():
              os.system(f'cd utils && go run logging.go {Status} "{CustomMsg}" {Severity}')
         else:
             raise InvalidStatus()
-
-    def __init__(self, logging: bool = False) -> None:
-        self._URL_Json: str = "https://wttr.in/?format=j1"
-        self._swww_duration: int = 1.5
-        self._hyprlockPath: str = "~/.config/hypr/hyprlock.conf"
-        self._swww_transition: str = "fade"
-        self._WeatherCodes: Dict[str, Dict[int]] = {
-        "clear": {113},
-        "partly_cloudy": {116},
-        "cloudy": {119, 122},
-        "fog": {143, 248, 260},
-        "drizzle": {263, 266},
-        "rain": {176,293,296,299,302,305,308},
-        "sleet": {281,284,317, 320, 362, 365},
-        "snow": {179, 323, 326, 329, 332, 335, 338},
-        "snow_showers": {368,371},
-        "hail": {350, 374, 377},
-        "thunderstorm": {200, 386, 389, 392, 395}
-    }
-        self.currentDir = os.getcwd()
-        try:
-            self.Weather: List[Any] = self.makeRequest(True)
-            self.Condition = self.classify(self.Weather[-1], True)
-            self.Logging("Success")
-            print(self.returnFiles(True))
-            self.applyWal(True) 
-        except requests.exceptions.ConnectionError as f:
-            self.Logging("Fail")
-            return
-        except InvalidStatus as g:
-            self.Logging("Custom","A status was not found","Error")
-            return 
-        except ZeroWallpapers as e:
-            self.Logging("Custom","Zero wallpapers found in chosen dir/condition, are there any wallpapers in mind?", "Warn")
-            return
-        except InvalidCode as h:
-            self.Logging("Custom","The weather code provided is not correct, are you even on earth?", "Error")
-            return
-        except WalFailed as j:
-            self.Logging("Custom","Fail; No image found!","Error")  
-            return
 
     def classify(self, code: int, logging = False) -> str:
         if logging == True:
@@ -112,7 +72,7 @@ class main():
             self.Logging("Custom", "Navigating through conditions...", "Debug")
         else:
             pass
-        return f"{self.currentDir}/wallpapers/{currentCondition}"
+        return f"{self._currentDir}/wallpapers/{currentCondition}"
 
     def returnFiles(self, logging: bool = False) -> List[Union[str, None]]:
         if logging == True:
@@ -145,7 +105,7 @@ class main():
         else:
             pass
         self.selectedWallpaper: str = self.returnRandomWallpaper(True)
-        randomizedWalPath: str = f"{self.currentDir}/wallpapers/{self.Condition}/{self.selectedWallpaper}"
+        randomizedWalPath: str = f"{self._currentDir}/wallpapers/{self.Condition}/{self.selectedWallpaper}"
         self.SwwwExitCode: int = os.system(f"{wallpapermnger} img wallpapers/{self.Condition}/{self.selectedWallpaper} --transition-type {self._swww_transition} --transition-duration {self._swww_duration}")
         if self.SwwwExitCode != 0:
             raise SwwwFailed() 
@@ -157,7 +117,7 @@ class main():
         try:
             randomizedWalPath_: str = self.setWallpaper(True) 
         except SwwwFailed as g:
-            self.Logging("Custom","Unable to run swww!","Error")
+            self.Logging("Custom","Unable to run swww! Is the daemon running?","Error")
             return
         if logging == True:
             self.Logging("Custom","Applying colorscheme...","Debug")
@@ -172,7 +132,6 @@ class main():
             self.restartBar("eww", True)
             self.hyprLock(True)
 
-
     #Optional, add or remove depending on your status bar and hyprlock!
     def restartBar(self, statusBar: str, logging: bool = False) -> None:
         if logging == True:
@@ -186,13 +145,12 @@ class main():
             self.Logging("Custom","Changing hyprlock...","Debug")
         else:
             pass
-        os.system(f'sh utils/ShellUtil.sh hyprLock {self.selectedWallpaper} {self.Condition} {self.currentDir}')
+        os.system(f'sh utils/ShellUtil.sh hyprLock {self.selectedWallpaper} {self.Condition} {self._currentDir}')
 
 
-X = main()
+app = main(_init_logging=True)
 
 
 #Add notify-send
-#In the future (tomorrow or late today) look at ways to improve and modulize it
 #Use configparser and make an ini config file
 #Make this modular by dividing up the classes into seperate files and making it cleaner
