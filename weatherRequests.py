@@ -31,11 +31,11 @@ A valid way to write the logging modes is this:
 class main(ConfigInit):
     @staticmethod
     def Logging(Status: T, CustomMsg = None, Severity = None) -> None:
-        if Status == "Success" and (type(Status) == str):
+        if Status == "Success" and (isinstance(Status, str)):
             os.system(f"cd utils && go run logging.go {Status}")
-        elif Status == "Fail" and (type(Status) == str):
+        elif Status == "Fail" and (isinstance(Status, str)):
              os.system(f"cd utils && go run logging.go {Status}")
-        elif Status == "Custom" and (type(Status) == str):
+        elif Status == "Custom" and (isinstance(Status, str)):
              os.system(f'cd utils && go run logging.go {Status} "{CustomMsg}" {Severity}')
         else:
             raise InvalidStatus()
@@ -129,24 +129,28 @@ class main(ConfigInit):
         if self.WalExitCode != 0:
             raise WalFailed()
         else:
-            self.restartBar("eww", True)
-            self.hyprLock(True)
-
+            self.restartBar("eww",self.Eww_Reset, True)
+            self.hyprLock(self.Hyprlock_Set, True)
     #Optional, add or remove depending on your status bar and hyprlock!
-    def restartBar(self, statusBar: str, logging: bool = False) -> None:
-        if logging == True:
-            self.Logging("Custom", "Restarting eww bar for USER", "Debug")
+    def restartBar(self, statusBar: str, execute: bool, logging: bool = False) -> None:
+        if execute:
+            if logging == True:
+                self.Logging("Custom", "Restarting eww bar for USER", "Debug")
+            else:
+                pass
+            os.system(f"sh utils/ShellUtil.sh Eww")
         else:
-            pass
-        os.system(f"sh utils/ShellUtil.sh Eww")
+            self.Logging("Custom", "Eww reset not enabled", "Debug")
 
-    def hyprLock(self, logging: bool = False) -> None:
-        if logging == True:
-            self.Logging("Custom","Changing hyprlock...","Debug")
+    def hyprLock(self,execute: bool, logging: bool = False) -> None:
+        if execute:
+            if logging == True:
+                self.Logging("Custom","Changing hyprlock...","Debug")
+            else:
+                pass
+            os.system(f'sh utils/ShellUtil.sh hyprLock {self.selectedWallpaper} {self.Condition} {self._currentDir}')
         else:
-            pass
-        os.system(f'sh utils/ShellUtil.sh hyprLock {self.selectedWallpaper} {self.Condition} {self._currentDir}')
-
+            self.Logging("Custom","Setting hyprlock is not enabled","Debug")
 
 app = main(_init_logging=True)
 
