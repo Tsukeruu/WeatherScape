@@ -68,7 +68,7 @@ class ConfigInit:
             self.WriteToFile(self._configFile)
 
         #Calling it here because either way the configfile WILL still exist
-        self.Eww_Reset, self.Hyprlock_Set = self.ReturnConfigValues(self._configFile, ["Eww_Bar_Restart", "Hyprlock_Set"], "General")
+        self._Eww_Reset, self._Hyprlock_Set = self.ReturnConfigValues(self._configFile, ["Eww_Bar_Restart", "Hyprlock_Set"], "General")
 
         try:
             self.Weather: List[Any] = self.makeRequest(True)

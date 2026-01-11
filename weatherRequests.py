@@ -129,8 +129,8 @@ class main(ConfigInit):
         if self.WalExitCode != 0:
             raise WalFailed()
         else:
-            self.restartBar("eww",self.Eww_Reset, True)
-            self.hyprLock(self.Hyprlock_Set, True)
+            self.restartBar("eww",self._Eww_Reset, True)
+            self.hyprLock(self._Hyprlock_Set, True)
     #Optional, add or remove depending on your status bar and hyprlock!
     def restartBar(self, statusBar: str, execute: bool, logging: bool = False) -> None:
         if execute:
