@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import ClassVar, Dict, Set, List
+from typing import ClassVar, Dict, Set, List, Callable
 from utils.pyUtils.Exceptions import InvalidCode, InvalidStatus, ZeroWallpapers, SwwwFailed, WalFailed
 from pathlib import Path
 import configparser
@@ -69,7 +69,6 @@ class ConfigInit:
 
         #Calling it here because either way the configfile WILL still exist
         self._Eww_Reset, self._Hyprlock_Set = self.ReturnConfigValues(self._configFile, ["Eww_Bar_Restart", "Hyprlock_Set"], "General")
-
         try:
             self.Weather: List[Any] = self.makeRequest(True)
             self.Condition = self.classify(self.Weather[-1], True)
