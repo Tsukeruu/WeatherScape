@@ -29,20 +29,38 @@ A valid way to write the logging modes is this:
 """
 
 class main(ConfigInit):
-    @staticmethod
-    def Logging(Status: T, CustomMsg = None, Severity = None) -> None:
-        if Status == "Success" and (isinstance(Status, str)):
-            os.system(f"cd utils && go run logging.go {Status}")
-        elif Status == "Fail" and (isinstance(Status, str)):
-             os.system(f"cd utils && go run logging.go {Status}")
-        elif Status == "Custom" and (isinstance(Status, str)):
-             os.system(f'cd utils && go run logging.go {Status} "{CustomMsg}" {Severity}')
+    def Logging(self, Status: T, CustomMsg: str = None, Severity: str = None) -> None:
+        if not self._args.quiet:
+            if Status == "Success" and (isinstance(Status, str)):
+                subprocess.run(
+                    f"cd utils && go run logging.go {Status}",
+                    shell=True,
+                    cwd=self._currentDir
+                )
+            elif Status == "Fail" and (isinstance(Status, str)):
+                subprocess.run(
+                    f"cd utils && go run logging.go {Status}",
+                    shell=True,
+                    cwd=self._currentDir
+                )
+            elif Status == "Custom" and (isinstance(Status, str)):
+                subprocess.run(
+                    f'cd utils && go run logging.go {Status} "{CustomMsg}" {Severity}',
+                    shell=True,
+                    cwd=self._currentDir
+                )
+            else:
+                raise InvalidStatus()
         else:
-            raise InvalidStatus()
+            pass
 
     def classify(self, code: int, logging = False) -> str:
         if logging == True:
-            self.Logging("Custom", "Finding condition via given weather code...", "Debug")
+            self.Logging(
+                    "Custom", 
+                    "Finding condition via given weather code...", 
+                    "Debug"
+                )
         else:
             pass
         for condition, codes in self._WeatherCodes.items():
@@ -53,7 +71,11 @@ class main(ConfigInit):
 
     def makeRequest(self, logging: bool = False) -> List[Any]:
         if logging == True:
-            self.Logging("Custom","Attempting to do a GET request towards wttr.in!","Debug")
+            self.Logging(
+                    "Custom",
+                    "Attempting to do a GET request towards wttr.in!",
+                    "Debug"
+                )
         else:
             pass
         data: List[Any] = []
@@ -69,14 +91,22 @@ class main(ConfigInit):
 
     def navigation(self, currentCondition: str, logging: bool = False) -> str:
         if logging == True:
-            self.Logging("Custom", "Navigating through conditions...", "Debug")
+            self.Logging(
+                    "Custom", 
+                    "Navigating through conditions...", 
+                    "Debug"
+                )
         else:
             pass
         return f"{self._currentDir}/wallpapers/{currentCondition}"
 
     def returnFiles(self, logging: bool = False) -> List[Union[str, None]]:
         if logging == True:
-            self.Logging("Custom","Listing files in the dir!", "Debug")
+            self.Logging(
+                    "Custom",
+                    "Listing files in the dir!",
+                    "Debug"
+                )
         else:
             pass
         self.chosenDir: str = self.navigation(self.Condition, True)
@@ -87,13 +117,21 @@ class main(ConfigInit):
         if not self.currentFiles:
             raise ZeroWallpapers()
         else:
-            self.Logging("Custom",f"Found ({len(self.currentFiles)})! wallpapers for {self.Condition}","Info")
+            self.Logging(
+                    "Custom",
+                    f"Found ({len(self.currentFiles)})! wallpapers for {self.Condition}",
+                    "Info"
+                )
 
         return self.currentFiles
    
     def returnRandomWallpaper(self, logging: bool = False) -> str:
         if logging == True:
-            self.Logging("Custom","Returning a random wallpaper...","Debug")
+            self.Logging(
+                    "Custom",
+                    "Returning a random wallpaper...",
+                    "Debug"
+                )
         else:
             pass
         self.Randomizedwallpaper: str = random.choice(self.currentFiles)
@@ -101,12 +139,21 @@ class main(ConfigInit):
 
     def setWallpaper(self, logging: bool = False, wallpapermnger: str = "swww") -> str: 
         if logging == True:
-            self.Logging("Custom",f"Using {wallpapermnger} to set the wallpaper...", "Debug")
+            self.Logging(
+                    "Custom",
+                    f"Using {wallpapermnger} to set the wallpaper...", 
+                    "Debug"
+                )
         else:
             pass
         self.selectedWallpaper: str = self.returnRandomWallpaper(True)
         randomizedWalPath: str = f"{self._currentDir}/wallpapers/{self.Condition}/{self.selectedWallpaper}"
-        self.SwwwExitCode: int = os.system(f"{wallpapermnger} img wallpapers/{self.Condition}/{self.selectedWallpaper} --transition-type {self._swww_transition} --transition-duration {self._swww_duration}")
+
+        self.SwwwExitCode: int = subprocess.run(
+                f"{wallpapermnger} img {randomizedWalPath} --transition-type {self._swww_transition} --transition-duration {self._swww_duration}",
+                shell=True
+            ).returncode
+
         if self.SwwwExitCode != 0:
             raise SwwwFailed() 
         else:
@@ -117,44 +164,74 @@ class main(ConfigInit):
         try:
             randomizedWalPath_: str = self.setWallpaper(True) 
         except SwwwFailed as g:
-            self.Logging("Custom","Unable to run swww! Is the daemon running?","Error")
+            self.Logging(
+                    "Custom",
+                    "Unable to run swww! Is the daemon running?",
+                    "Error"
+                )
             return
         if logging == True:
-            self.Logging("Custom","Applying colorscheme...","Debug")
+            self.Logging(
+                    "Custom",
+                    "Applying colorscheme...",
+                    "Debug"
+                )
         else:
             pass
-        result: int = subprocess.run(["wal","-i",randomizedWalPath_,"-e"]) #the -e flag is important here because it stops from pausing the script
-        #self.WalExitCode: int = os.system(f"wal -i {randomizedWalPath_}") Using os is deprecated
+        result: int = subprocess.run(
+                f"wal -i {randomizedWalPath_} -e",
+                shell=True
+            ) 
         self.WalExitCode: int = result.returncode
         if self.WalExitCode != 0:
             raise WalFailed()
         else:
-            self.restartBar("eww",self._Eww_Reset, True)
+            self.restartBar("Eww",self._Eww_Reset, True)
             self.hyprLock(self._Hyprlock_Set, True)
-    #Optional, add or remove depending on your status bar and hyprlock!
+
     def restartBar(self, statusBar: str, execute: bool, logging: bool = False) -> None:
         if execute:
             if logging == True:
-                self.Logging("Custom", "Restarting eww bar for USER", "Debug")
+                self.Logging(
+                        "Custom",
+                        "Restarting eww bar for USER",
+                        "Debug"
+                    )
             else:
                 pass
-            os.system(f"sh utils/ShellUtil.sh Eww")
+            subprocess.run(
+                f"sh {self._currentDir}/utils/ShellUtil.sh {statusBar}",
+                shell=True
+            )
         else:
-            self.Logging("Custom", "Eww reset not enabled", "Debug")
+            self.Logging(
+                "Custom",
+                "Eww reset not enabled",
+                "Debug"
+            )
 
     def hyprLock(self,execute: bool, logging: bool = False) -> None:
         if execute:
             if logging == True:
-                self.Logging("Custom","Changing hyprlock...","Debug")
+                self.Logging(
+                    "Custom",
+                    "Changing hyprlock...",
+                    "Debug"
+                )
             else:
                 pass
-            os.system(f'sh utils/ShellUtil.sh hyprLock {self.selectedWallpaper} {self.Condition} {self._currentDir}')
+            subprocess.run(
+                f"sh {self._currentDir}/utils/ShellUtil.sh hyprLock {self.selectedWallpaper} {self.Condition} {self._currentDir}",
+                shell=True
+            )
         else:
-            self.Logging("Custom","Setting hyprlock is not enabled","Debug")
+            self.Logging(
+                "Custom",
+                "Setting hyprlock is not enabled",
+                "Debug"
+            )
 
 app = main(_init_logging=True)
 
 
 #Add notify-send
-#Use configparser and make an ini config file
-#Make this modular by dividing up the classes into seperate files and making it cleaner
