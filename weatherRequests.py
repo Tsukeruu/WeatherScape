@@ -161,15 +161,6 @@ class main(ConfigInit):
         return randomizedWalPath
 
     def applyWal(self, logging: bool = False) -> None:
-        try:
-            randomizedWalPath_: str = self.setWallpaper(True) 
-        except SwwwFailed as g:
-            self.Logging(
-                    "Custom",
-                    "Unable to run swww! Is the daemon running?",
-                    "Error"
-                )
-            return
         if logging == True:
             self.Logging(
                     "Custom",
@@ -178,16 +169,36 @@ class main(ConfigInit):
                 )
         else:
             pass
-        result: int = subprocess.run(
-                f"wal -i {randomizedWalPath_} -e",
-                shell=True
-            ) 
+
+        try:
+            randomizedWalPath_: str = self.setWallpaper(True) 
+        except SwwwFailed as g:
+            self.Logging(
+                    "Custom",
+                    "Unable to run swww! Is the daemon running?",
+                    "Error"
+                )
+
+            return
+        result: int
+        if self._args.quiet:
+            result: int = subprocess.run(
+                    f"wal -i {randomizedWalPath_} -e -q",
+                    shell=True
+                )
+        else:
+            result: int = subprocess.run(
+                    f"wal -i {randomizedWalPath_} -e",
+                    shell=True
+                )
+
         self.WalExitCode: int = result.returncode
         if self.WalExitCode != 0:
             raise WalFailed()
         else:
             self.restartBar("Eww",self._Eww_Reset, True)
             self.hyprLock(self._Hyprlock_Set, True)
+            self.notifysend(self._Notify_send,"Changed to weather", f"Applied theme according to the weather:\n {self.Condition}", True)
 
     def restartBar(self, statusBar: str, execute: bool, logging: bool = False) -> None:
         if execute:
@@ -229,6 +240,28 @@ class main(ConfigInit):
                 "Custom",
                 "Setting hyprlock is not enabled",
                 "Debug"
+            )
+
+    def notifysend(self, execute: bool, title: str, body: str, logging: bool = False) -> None:
+        if execute:
+            if logging == True:
+                self.Logging(
+                    "Custom",
+                    "Sending notification via the notification daemon",
+                    "Info"
+                )
+            else:
+                pass
+
+            subprocess.run(
+                f"notify-send '{title}' '{body}'",
+                shell=True
+            )
+        else:
+            self.Logging(
+                "Custom",
+                "Notification sending is not enabled",
+                "Info"
             )
 
 app = main(_init_logging=True)

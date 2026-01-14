@@ -1,3 +1,4 @@
 [General]
 Eww_Bar_Restart = true
 Hyprlock_Set = true
+Send_Notification = true

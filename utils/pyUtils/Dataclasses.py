@@ -15,7 +15,7 @@ class ConfigInit(Args):
     _URL_Json: str = "https://wttr.in/?format=j1&num_of_days=1"
     _swww_duration: int = 1.5
     _swww_transition: int = "fade"
-    _currentDir: str = Path(__file__).parent.parent.parent
+    _currentDir: str = Path(__file__).parents[2] #parent.parent.parent
     _configDir: str = Path.home() / ".config" / "weatherscape"
     _configFile: str =  Path.home() / ".config" / "weatherscape" / "MyConfig.ini"
     _configParser = configparser.ConfigParser() 
@@ -37,7 +37,7 @@ class ConfigInit(Args):
     @staticmethod
     def WriteToFile(filePath: str, Content: str = None) -> None:
         if Content == None:
-            Content = Path(__file__).parent.parent / "pyUtils" / "Text_Files" / "Default_Config.txt" #Path(__file__) returns where the file is located regardless of where i am, .parent returns the parent dir
+            Content = Path(__file__).parents[1] / "pyUtils" / "Text_Files" / "Default_Config.txt" #Path(__file__) returns where the file is located regardless of where i am, parents returns a list of parent dir's for file's abs location, we can index certain parents using [index]
             Content = Content.read_text()
         else:
             pass
@@ -90,7 +90,7 @@ class ConfigInit(Args):
             self.WriteToFile(self._configFile)
 
         #Calling it here because either way the configfile WILL still exist
-        self._Eww_Reset, self._Hyprlock_Set = self.ReturnConfigValues(self._configFile, ["Eww_Bar_Restart", "Hyprlock_Set"], "General")
+        self._Eww_Reset, self._Hyprlock_Set, self._Notify_send = self.ReturnConfigValues(self._configFile, ["Eww_Bar_Restart", "Hyprlock_Set", "Send_Notification"], "General")
         try:
             self.Weather: List[Any] = self.makeRequest(True)
             self.Condition = self.classify(self.Weather[-1], True)
