@@ -6,9 +6,8 @@
   
   - **People who find a need for this program are those who find coziness on their setup and love to match the weather**
 
-
   <details>
-  <summary>**How it works 🛠️**</summary>
+  <summary>How it works 🛠️</summary>
     
   - **A GET request is made towards wttr.in which returns local forecast data. Inside of the json structured data includes weathercodes and other valuable information**
     
@@ -18,7 +17,14 @@
     
   - **WeatherScape comes with stored wallpapers, you can change them to fit your needs, and find wallpapers that you want to have during a specific weather condition**
   </details>
-  ## Disclaimer ⚠️
+
+  <details>
+  <summary>Disclaimer ⚠️</summary>
+    
   - **WeatherScape runs solely on the internet connection, which works in a direct relationship**
+    
   - **The faster internet you have, the faster the GET request will be**
+    
   - **Returned data may not be accurate as this may be a problem with your location or in the wttr.in backend**
+  </details>
+  
