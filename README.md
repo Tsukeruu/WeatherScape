@@ -3,6 +3,10 @@
     
   ![Demo](Preview/help.png)
   - **More arguements are yet to come as more functionality is included**
+
+  ![Demo](Preview/preview-working-program.png)
+  - **The program comes with beautiful logging that comes from charmbracelets' log library**
+  
   <details>
   <summary>The purpose 🎯</summary>
     
