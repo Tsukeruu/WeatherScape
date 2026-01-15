@@ -2,7 +2,7 @@
   - **WeatherScape aims to enhance your experience as a wayland user, by providing you with a cozy setup that matches the weather**
     
   ![Demo](Preview/help.png)
-  - **More arguements are yet to come as more functionality is included**
+  - **⚠️ More arguements are yet to come as more functionality is included**
 
   ![Demo](Preview/preview-working-program.png)
   - **WeatherScape comes with beautiful logging that comes from charmbracelets' log library**
@@ -10,6 +10,16 @@
   ![Demo](Preview/preview-working-wallpaper.png)
   - **WeatherScape sets the wallpaper using Swww, this image corresponds to the image above**
   - **As seen, pywal is also applied (if installed)**
+
+  ![Demo](Preview/preview-working-program-quiet.png)
+  - **Here is a preview for the quiet mode, as seen, ZERO logging giving your terminal a clear look**
+  - **⚠️ Errors may interrupt!**
+
+  ![Demo](Preview/preview-working-wallpaper2.png)
+  - **Here is a preview of how it looks from the quiet mode... This image corresponds to the image above**
+
+  ![Demo](Preview/cava_visualizer.png)
+  - **A neat demonstration of how the theme is applied using the cava visualizer**
   
   <details>
   <summary>The purpose 🎯</summary>
