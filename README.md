@@ -25,4 +25,5 @@
 
 ```python
 print("This is inside the tab")
-</details>```
+```
+</details>
