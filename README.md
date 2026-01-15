@@ -4,7 +4,7 @@
   <details>
   <summary>Preview</summary>
     
-    ![Demo](Preview/help.png)
+  ![Demo](Preview/help.png)
     - **⚠️ More arguements are yet to come as more functionality is included**
 
   ![Demo](Preview/preview-working-program.png)
