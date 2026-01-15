@@ -2,6 +2,7 @@
   - **WeatherScape aims to enhance your experience as a wayland user, by providing you with a cozy setup that matches the weather**
     
   ![Demo](Preview/help.png)
+  - **More arguements are yet to come as more functionality is included**
   <details>
   <summary>The purpose 🎯</summary>
     
