@@ -8,7 +8,7 @@
 
 
   <details>
-  <summary>How it works 🛠️</summary>
+  <summary>**How it works 🛠️**</summary>
     
   - **A GET request is made towards wttr.in which returns local forecast data. Inside of the json structured data includes weathercodes and other valuable information**
     
