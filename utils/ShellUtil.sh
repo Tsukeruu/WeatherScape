@@ -5,7 +5,7 @@ main() {
 }
 
 if [[ $1 = "Eww" ]]; then
- eww kill && eww open-many bar notifications
+ eww kill && eww open-many bar notifications >/dev/null 2>&1
 fi
 
 if [[ $1 = "hyprLock" ]]; then
