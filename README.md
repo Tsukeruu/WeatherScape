@@ -9,6 +9,7 @@
 
   ![Demo](Preview/preview-working-wallpaper.png)
   - **WeatherScape sets the wallpaper using Swww, this image corresponds to the image above**
+  - **As seen, pywal is also applied (if installed)**
   
   <details>
   <summary>The purpose 🎯</summary>
