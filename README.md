@@ -1,11 +1,14 @@
 # Weatherscape ☁️
-  ## The purpose 🎯
+  <details>
+  <summary>The purpose 🎯</summary>
+    
   - **The primary purpose of weatherscape is to change your hyprland/wayland setup according to your local weather**
   
   - **This program is especially useful for people who love to customize their setup**
   
   - **People who find a need for this program are those who find coziness on their setup and love to match the weather**
-
+  </details>
+  
   <details>
   <summary>How it works 🛠️</summary>
     
