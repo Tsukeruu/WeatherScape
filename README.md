@@ -5,7 +5,10 @@
   - **More arguements are yet to come as more functionality is included**
 
   ![Demo](Preview/preview-working-program.png)
-  - **The program comes with beautiful logging that comes from charmbracelets' log library**
+  - **WeatherScape comes with beautiful logging that comes from charmbracelets' log library**
+
+  ![Demo](Preview/preview-working-wallpaper.png)
+  - **WeatherScape sets the wallpaper using Swww, this image corresponds to the image above**
   
   <details>
   <summary>The purpose 🎯</summary>
