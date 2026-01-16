@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import ClassVar, Dict, Set, List, Callable
+from typing import ClassVar, Dict, Set, List, Callable, Any
 from utils.pyUtils.Exceptions import InvalidCode, InvalidStatus, ZeroWallpapers, SwwwFailed, WalFailed
 from pathlib import Path
 from .Args import Args

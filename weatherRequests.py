@@ -92,10 +92,10 @@ class main(ConfigInit):
     def navigation(self, currentCondition: str, logging: bool = False) -> str:
         if logging == True:
             self.Logging(
-                    "Custom", 
-                    "Navigating through conditions...", 
-                    "Debug"
-                )
+                "Custom", 
+                "Navigating through conditions...", 
+                "Debug"
+            )
         else:
             pass
         return f"{self._currentDir}/wallpapers/{currentCondition}"
