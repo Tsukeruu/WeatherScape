@@ -66,6 +66,8 @@
   - **Returned data may not be accurate as this may be a problem with your location or in the wttr.in backend**
 
   - **Often times, if wttr.in cannot locate your location, likely due to an issue in the backend, it will fallback to california**
+
+  - **To fix such errors, specify the location manually by changing the base api endpoint to point to your location**
   
   - **Do not be surprised if the program returns an inaccurate weather result, its simply an issue regarding wttr.in**
     
