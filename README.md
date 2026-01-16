@@ -31,7 +31,8 @@
   ![Demo](Preview/cava_visualizer.png)
   
   - **A neat demonstration of how the theme is applied using the cava visualizer**
-    
+
+  -**The previous examples show how WeatherScape sets the theme according to the weather, in my case my weather at that time was Sunny, and so the wallpapers returned emit that vibe**
   </details>
   
   <details>
