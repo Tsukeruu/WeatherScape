@@ -2,7 +2,7 @@
   - **WeatherScape aims to enhance your experience as a wayland user, by providing you with a cozy setup that matches the weather**
 
   <details>
-  <summary>Preview</summary>
+  <summary>Preview 👀</summary>
     
   ![Demo](Preview/help.png)
   
@@ -39,7 +39,7 @@
 
 
   <details>
-  <summary>Features</summary>
+  <summary>Features ✨</summary>
 
   - **A neat feature of WeatherScape is that it comes with a config file**
     
