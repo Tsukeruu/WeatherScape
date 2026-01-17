@@ -36,20 +36,22 @@
   </details>
 
 
+
+
   <details>
   <summary>Features</summary>
+
+  - **A neat feature of WeatherScape is that it comes with a config file**
     
-     **A neat feature of WeatherScape is that it comes with a config file**
-    
-     **In this config file the user can adjust the behaviour of the program, the config file is as follows**
-     
-        - **Allow WeatherScape change the hyprlock background according to the wallpaper**
+  - **In this config file the user can adjust the behaviour of the program, the config file is as follows**
+
+    - **Allow WeatherScape change the hyprlock background according to the wallpaper**
         
-        - **Allow WeatherScape to send a notification every time the program is ran**
+    - **Allow WeatherScape to send a notification every time the program is ran**
         
-        - **Allow WeatherScape to restart Eww bar when wallpaper is set**
+    - **Allow WeatherScape to restart Eww bar when wallpaper is set**
         
-        - **For snowy weathers, WeatherScape allows you to enable hyprsnow, this adds a nice aesthetic whenever its currently snowing outside**
+    - **For snowy weathers, WeatherScape allows you to enable hyprsnow, this adds a nice aesthetic whenever its currently snowing outside**
         
   </details>
   
