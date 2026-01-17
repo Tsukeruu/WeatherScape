@@ -34,6 +34,17 @@
 
   - **The previous examples show how WeatherScape sets the theme according to the weather, in my case my weather at that time was Sunny, and so the wallpapers returned emit that vibe**
   </details>
+
+
+  <details>
+  <summary>Features</summary>
+     **A neat feature of WeatherScape is that it comes with a config file**
+     **In this config file the user can adjust the behaviour of the program, the config file is as follows**
+        - **Allow WeatherScape change the hyprlock background according to the wallpaper**
+        - **Allow WeatherScape to send a notification every time the program is ran**
+        - **Allow WeatherScape to restart Eww bar when wallpaper is set**
+        - **For snowy weathers, WeatherScape allows you to enable hyprsnow, this adds a nice aesthetic whenever its currently snowing outside**
+  </details>
   
   <details>
   <summary>The purpose 🎯</summary>
