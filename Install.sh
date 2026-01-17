@@ -22,7 +22,7 @@ EOF
 ubuntu() {
    sudo apt update
    sudo apt install python3-pip imagemagick
-   sudo pip3 install pywal
+   pip3 install pywal
    sudo apt install build-essential pkg-config liblz4-dev git
    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
    source $HOME/.cargo/env
@@ -31,21 +31,26 @@ ubuntu() {
    cargo build --release
    sudo cp target/release/swww target/release/swww-daemon /usr/local/bin/
    sudo add-apt-repository ppa:longsleep/golang-backports && sudo apt update && sudo apt install golang-go
+   cd utils && go build .
 }
 
 Installation() {
  if [[ $1 = "arch" ]]; then
-  sudo pacman -S python-pywal
-  sudo pacman -S swww
-  sudo pacman -S go
+  sudo pacman -S --noconfirm python-pywal
+  sudo pacman -S --noconfirm swww
+  sudo pacman -S --noconfirm go
+  cd utils && go build .
  elif [[ $1 = "fedora" ]]; then
    sudo dnf copr enable luisbocanegra/kde-material-you-colors
    sudo dnf copr enable materka/swww
    sudo dnf install python-pywal
    sudo dnf install swww
    sudo dnf install golang
+   cd utils && go build .
  elif [[ $1 = "ubuntu" ]]; then
    ubuntu
+ else 
+   echo "No method found for provided distro"
  fi
 }
 
