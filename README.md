@@ -96,5 +96,4 @@
 
   - **Hyprsnow is disabled by default due to performance prioritization, enable it in the config file and re run the program to submit the changes**
     
-  </details>
-  
+  </details> 
