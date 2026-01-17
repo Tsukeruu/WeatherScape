@@ -36,8 +36,6 @@
   </details>
 
 
-
-
   <details>
   <summary>Features ✨</summary>
 
@@ -55,6 +53,18 @@
         
     - **For snowy weathers, WeatherScape allows you to enable hyprsnow, this adds a nice aesthetic whenever its currently snowing outside**
         
+  </details>
+
+  <details>
+  <summary>Installation</summary>
+    
+  - **Installation goes here**
+  </details>
+
+  <details>
+  <summary>Usage</summary>
+    
+  - **Usage goes here**
   </details>
   
   <details>
