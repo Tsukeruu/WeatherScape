@@ -45,7 +45,7 @@
     
   - **In this config file the user can adjust the behaviour of the program, the config file is as follows**
 
-  - ![Demo](Preview/config-preview.png)
+    ![Demo](Preview/config-preview.png)
 
     - **Allow WeatherScape change the hyprlock background according to the wallpaper**
         
