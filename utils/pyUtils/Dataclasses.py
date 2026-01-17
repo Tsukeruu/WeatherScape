@@ -12,7 +12,7 @@ import argparse
 @dataclass
 class ConfigInit(Args):
     _hyprlockPath: str = "~/.config/hypr/hyprlock.conf"
-    _URL_Json: str = "https://wttr.in/?format=j1&num_of_days=1"
+    _URL_Json: str = "https://wttr.in/Mont-Tremblant?format=j1" #"https://wttr.in/?format=j1&num_of_days=1"
     _swww_duration: int = 1.5
     _swww_transition: int = "fade"
     _currentDir: str = Path(__file__).parents[2] #parent.parent.parent
@@ -32,6 +32,10 @@ class ConfigInit(Args):
         "hail": {350, 374, 377},
         "thunderstorm": {200, 386, 389, 392, 395}
     } 
+    _hyprSnowConditions: ClassVar[List[str]] = [
+        "snow",
+        "snow_showers"
+    ]
     _init_logging: bool = False
 
     @staticmethod
@@ -90,7 +94,24 @@ class ConfigInit(Args):
             self.WriteToFile(self._configFile)
 
         #Calling it here because either way the configfile WILL still exist
-        self._Eww_Reset, self._Hyprlock_Set, self._Notify_send = self.ReturnConfigValues(self._configFile, ["Eww_Bar_Restart", "Hyprlock_Set", "Send_Notification"], "General")
+        self._Eww_Reset, self._Hyprlock_Set, self._Notify_send = self.ReturnConfigValues(
+                self._configFile,
+                [
+                    "Eww_Bar_Restart",
+                    "Hyprlock_Set",
+                    "Send_Notification"
+                ],
+                "General"
+            )
+        #A neat trick for single element tuples is that you add a comma and a space and this tricks python into thinking theres two elements to unpack when in reality theres one
+        self._hyprSnow,  = self.ReturnConfigValues(
+                self._configFile, 
+                [
+                    "Hyprsnow"
+                ],
+                "Snow"
+            )
+
         try:
             self.Weather: List[Any] = self.makeRequest(True)
             self.Condition = self.classify(self.Weather[-1], True)

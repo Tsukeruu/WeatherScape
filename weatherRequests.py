@@ -169,6 +169,14 @@ class main(ConfigInit):
                 )
         else:
             pass
+        
+        #The callable arguements is an empty list because a callable cares about what LAMBDA passes as an arguement not what arguements the function that lambda calls no arguements are represented by an empty list, putting none is considered bad practice
+        _steps: List[Callabe[[], None]] = [
+            lambda: self.restartBar("Eww",self._Eww_Reset, True),
+            lambda: self.hyprLock(self._Hyprlock_Set, True),
+            lambda: self.notifysend(self._Notify_send,"Changed to weather", f"Applied theme according to the weather:\n {self.Condition}", True),
+            lambda: self.hyprSnow(self._hyprSnow, self.detectSnow(self.Condition)),
+        ]
 
         try:
             randomizedWalPath_: str = self.setWallpaper(True) 
@@ -196,9 +204,14 @@ class main(ConfigInit):
         if self.WalExitCode != 0:
             raise WalFailed()
         else:
+            for execution in _steps:
+                execution()
+            """
             self.restartBar("Eww",self._Eww_Reset, True)
             self.hyprLock(self._Hyprlock_Set, True)
             self.notifysend(self._Notify_send,"Changed to weather", f"Applied theme according to the weather:\n {self.Condition}", True)
+            self.hyprSnow(self._hyprSnow, self.detectSnow(self.Condition))
+            """
 
     def restartBar(self, statusBar: str, execute: bool, logging: bool = False) -> None:
         if execute:
@@ -264,7 +277,36 @@ class main(ConfigInit):
                 "Info"
             )
 
+    def detectSnow(self, condition: str) -> bool:
+        if (condition in self._WeatherCodes) and (condition in self._hyprSnowConditions):
+            return True
+        else:
+            return False
+
+    def hyprSnow(self, execute: bool, snowCondition: bool, logging: bool = False) -> None:
+        if logging:
+            self.Logging(
+                "Custom",
+                "Detecting hyprsnow..",
+                "Info"
+            )
+        else:
+            pass
+
+        if execute and snowCondition:
+            subprocess.run(
+                f"sh {self._currentDir}/utils/ShellUtil.sh hyprSnow-enable",
+                shell=True
+            )
+        else:
+            subprocess.run(
+                f"sh {self._currentDir}/utils/ShellUtil.sh hyprSnow-disable",
+                shell=True
+            )
+            self.Logging(
+                "Custom",
+                "Hyprsnow is disabled or its not snowing",
+                "Info"
+            )
+
 app = main(_init_logging=True)
-
-
-#Add notify-send

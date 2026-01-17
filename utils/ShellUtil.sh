@@ -14,3 +14,19 @@ if [[ $1 = "hyprLock" ]]; then
   currentDir=$4
   main
 fi
+
+if [[ $1 = "hyprSnow-enable" ]]; then
+  if pgrep -x hyprsnow; then
+    pkill hyprsnow && hyprsnow &
+  else
+    hyprsnow &
+  fi
+fi
+
+if [[ $1 = "hyprSnow-disable" ]]; then
+  if pgrep -x hyprsnow; then
+    pkill hyprsnow
+  else 
+    pkill hyprsnow
+  fi
+fi
