@@ -12,7 +12,7 @@ import argparse
 @dataclass
 class ConfigInit(Args):
     _hyprlockPath: str = "~/.config/hypr/hyprlock.conf"
-    _URL_Json: str = "https://wttr.in/Mont-Tremblant?format=j1" #"https://wttr.in/?format=j1&num_of_days=1"
+    _URL_Json: str = "https://wttr.in/?format=j1&num_of_days=1"
     _swww_duration: int = 1.5
     _swww_transition: int = "fade"
     _currentDir: str = Path(__file__).parents[2] #parent.parent.parent
@@ -57,7 +57,8 @@ class ConfigInit(Args):
         return returnedValues
             
     def __post_init__(self) -> None: 
-        super().__post_init__() #We called this because our init and post_init overrides Args.py's post_init and init, so they never exist, we did this because we call parent class's post init and init to initialize args, so then it can be passed down properly
+        super().__post_init__() #We called this because our init and post_init overrides Args.py's post_init, so they never exist, we did this because we call parent class's post init to initialize args, so then it can be passed down properly
+        #Please note that dataclasses who inherit from other dataclasses have their inits passed down, however if a dataclass has a postinit then the parent's post init isnt called unless we do so
         if self._init_logging == True:
             self.Logging(
                 "Custom",
