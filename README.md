@@ -1,7 +1,7 @@
 # WeatherScape ☁️
   - **WeatherScape aims to enhance your experience as a wayland user, by providing you with a cozy setup that matches the weather**
 
-  ![Demo](Preview/preview-demo.mp4)
+  https://github.com/user-attachments/assets/c5c9ac89-2792-427c-ad8d-a8adba2992ed
   
   <details>
   <summary>Preview 👀</summary>
