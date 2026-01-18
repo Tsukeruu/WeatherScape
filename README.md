@@ -7,8 +7,13 @@
   - **WeatherScape proceeded to configure my hyprlock, restart eww, send a notification everytime the program runs and the theme changes**
 
   - **For further evidence, here is a picture taken from when the demo was recorded**
-    
+
+  <details>
+  <summary>Evidence</summary>
+  
   ![IMG](Preview/preview-evidence.jpg)
+    
+  </details>
   
   <details>
   <summary>Preview 👀</summary>
