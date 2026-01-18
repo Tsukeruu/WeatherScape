@@ -109,11 +109,9 @@ class main(ConfigInit):
                 )
         else:
             pass
-        self.chosenDir: str = self.navigation(self.Condition, True)
-        self.currentFiles: List[Union[str, None]] = []
+        self.chosenDir: str = self.navigation(self.Condition, True) 
         self.allFiles: str = os.listdir(self.chosenDir)
-        for file in self.allFiles:
-            self.currentFiles.append(file)
+        self.currentFiles: List[Union[str, None]] = [file for file in self.allFiles]
         if not self.currentFiles:
             raise ZeroWallpapers()
         else:
