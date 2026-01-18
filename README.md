@@ -5,6 +5,10 @@
 
   - **The above video shows the demo, as seen weatherscape has generated a theme that matches the local weather, currently where i am, its foggy**
   - **WeatherScape proceeded to configure my hyprlock, restart eww, send a notification everytime the program runs and the theme changes**
+
+  - **For further evidence, here is a picture taken from when the demo was recorded**
+    
+  ![IMG](Preview/preview-evidence.jpg)
   
   <details>
   <summary>Preview 👀</summary>
