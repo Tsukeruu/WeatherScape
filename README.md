@@ -17,10 +17,11 @@
   
   <details>
   <summary>Preview 👀</summary>
+
+  https://github.com/user-attachments/assets/c5c9ac89-2792-427c-ad8d-a8adba2992ed
     
   ![Demo](Preview/help.png)
 
-  https://github.com/user-attachments/assets/c5c9ac89-2792-427c-ad8d-a8adba2992ed
   
   - **⚠️ More arguements are yet to come as more functionality is included**
 
