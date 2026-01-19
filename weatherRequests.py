@@ -98,6 +98,7 @@ class main(ConfigInit):
             )
         else:
             pass
+        #if you want to add stdin feature, use an if statement here to return this when theres no stdin, otherwise if theres stdin return the dir of it itself
         return f"{self._currentDir}/wallpapers/{currentCondition}"
 
     def returnFiles(self, logging: bool = False) -> List[Union[str, None]]:

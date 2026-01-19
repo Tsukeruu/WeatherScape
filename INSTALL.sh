@@ -1,6 +1,12 @@
 #!/bin/bash
 
 
+
+#Please note that if either anything breaks during this installation
+#or your distro was not properly detected
+#Refer to the github readme for the dependencies and install them manually
+
+
 cat << "EOF"
 WEATHERSCAPE INSTALLATION; VERSION (1.0.0)
 
