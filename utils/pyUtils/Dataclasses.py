@@ -36,7 +36,7 @@ class ConfigInit(Args):
         "snow",
         "snow_showers"
     ]
-    _init_logging: bool = False
+    _init_logging: bool = True
 
     @staticmethod
     def WriteToFile(filePath: str, Content: str = None) -> None:

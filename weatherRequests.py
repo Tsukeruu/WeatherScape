@@ -318,4 +318,4 @@ class main(ConfigInit):
                 "Info"
             )
 
-app = main(_init_logging=True)
+app = main()
