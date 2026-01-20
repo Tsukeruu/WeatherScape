@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from typing import ClassVar, Dict, Set, List, Callable, Any
-from utils.pyUtils.Exceptions import InvalidCode, InvalidStatus, ZeroWallpapers, SwwwFailed, WalFailed
+from utils.pyUtils.Exceptions import InvalidCode, InvalidStatus, ZeroWallpapers, SwwwFailed, WalFailed, InternalError
 from pathlib import Path
 from .Args import Args
 import configparser
@@ -149,4 +149,11 @@ class ConfigInit(Args):
                 "Fail; No image found!",
                 "Error"
             )  
+            return
+        except InternalError as b:
+            self.Logging(
+                "Custom",
+                "An internal error occured at wttr.in backend, dont worry this isnt your fault :)",
+                "Error"
+            )
             return
