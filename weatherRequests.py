@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 """
 Dependencies to install:
     Charmbracelets log library
@@ -9,13 +11,14 @@ Dependencies to install:
 
 from typing import List, Generic, TypeVar, Dict, Any, Union, ClassVar, Set
 from dataclasses import dataclass
-from utils.pyUtils.Exceptions import InvalidCode, InvalidStatus, ZeroWallpapers, SwwwFailed, WalFailed
+from utils.pyUtils.Exceptions import InvalidCode, InvalidStatus, ZeroWallpapers, SwwwFailed, WalFailed, InternalError
 from utils.pyUtils.Dataclasses import ConfigInit
 import requests
 import os
 import random
 import subprocess
 import configparser
+import sys
 
 T = TypeVar("T")
 
@@ -78,14 +81,21 @@ class main(ConfigInit):
                 )
         else:
             pass
-        data: List[Any] = []
-        self.WeatherData = requests.get(self._URL_Json).json()
-        self.AreaName: str = self.WeatherData["nearest_area"][0]["areaName"][0]["value"]
-        self.currentWeather: str = self.WeatherData["current_condition"][0]["weatherDesc"][0]["value"]
-        self.Temp_C: int = self.WeatherData["current_condition"][0]["FeelsLikeC"]
-        self.Temp_F: int = self.WeatherData["current_condition"][0]["FeelsLikeF"]
-        self.currentCode: int = int(self.WeatherData["current_condition"][0]["weatherCode"])
-        data.extend([self.AreaName, self.currentWeather, self.Temp_C, self.Temp_F, self.currentCode])
+        data: List[Union[str, int]] = []
+        self._WeatherData: dict[str, Any] = requests.get(self._URL_Json).json()
+        #Consider using typeddicts as this can get messy
+        self._current_condition: List[dict[str, Union[str, List[dict[str, str]]]]] = self._WeatherData.get("current_condition")
+        self._nearest_area: List[dict[str, Union[str, List[dict[str, str]]]]] = self._WeatherData.get("nearest_area")
+        #Using .get ensures we dont get an error when the key doesnt exist, usually the key doesnt exist because of an error in wttr.in backend
+        if (not self._current_condition) or (not self._nearest_area):
+            raise InternalError()
+        else:
+            self.AreaName: str = self._nearest_area[0]["areaName"][0]["value"]
+            self.currentWeather: str = self._current_condition[0]["weatherDesc"][0]["value"]
+            self.Temp_C: int = self._current_condition[0]["FeelsLikeC"]
+            self.Temp_F: int = self._current_condition[0]["FeelsLikeF"]
+            self.currentCode: int = int(self._current_condition[0]["weatherCode"])
+            data.extend([self.AreaName, self.currentWeather, self.Temp_C, self.Temp_F, self.currentCode])
         
         return data
 
@@ -98,7 +108,7 @@ class main(ConfigInit):
             )
         else:
             pass
-        #if you want to add stdin feature, use an if statement here to return this when theres no stdin, otherwise if theres stdin return the dir of it itself
+               
         return f"{self._currentDir}/wallpapers/{currentCondition}"
 
     def returnFiles(self, logging: bool = False) -> List[Union[str, None]]:
@@ -173,7 +183,7 @@ class main(ConfigInit):
         _steps: List[Callabe[[], None]] = [
             lambda: self.restartBar("Eww",self._Eww_Reset, True),
             lambda: self.hyprLock(self._Hyprlock_Set, True),
-            lambda: self.notifysend(self._Notify_send,"Changed to weather", f"Applied theme according to the weather:\n {self.Condition}", True),
+            lambda: self.notifysend(self._Notify_send,"Changed to weather", f"Applied theme according to the weather:\n{self.Condition}", True),
             lambda: self.hyprSnow(self._hyprSnow, self.detectSnow(self.Condition)),
         ]
 
