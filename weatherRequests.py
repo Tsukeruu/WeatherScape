@@ -120,6 +120,7 @@ class main(ConfigInit):
                 )
         else:
             pass
+
         self.chosenDir: str = self.navigation(self.Condition, True) 
         self.allFiles: str = os.listdir(self.chosenDir)
         self.currentFiles: List[Union[str, None]] = [file for file in self.allFiles]
