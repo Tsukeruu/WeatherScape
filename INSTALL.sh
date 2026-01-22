@@ -38,6 +38,7 @@ ubuntu() {
    sudo cp target/release/swww target/release/swww-daemon /usr/local/bin/
    sudo add-apt-repository ppa:longsleep/golang-backports && sudo apt update && sudo apt install golang-go
    cd utils && go build .
+   cd ..
 }
 
 Installation() {
@@ -46,6 +47,7 @@ Installation() {
   sudo pacman -S --noconfirm swww
   sudo pacman -S --noconfirm go
   cd utils && go build .
+  cd ..
  elif [[ $1 = "fedora" ]]; then
    sudo dnf copr enable luisbocanegra/kde-material-you-colors
    sudo dnf copr enable materka/swww
@@ -53,6 +55,7 @@ Installation() {
    sudo dnf install swww
    sudo dnf install golang
    cd utils && go build .
+   cd ..
  elif [[ $1 = "ubuntu" ]]; then
    ubuntu
  else 
@@ -86,4 +89,8 @@ elif command -v "apt"; then
   fi
 else 
   echo "Distro not detected, please check how to install the dependencies from your package manager"
+  exit
 fi
+
+echo "To run WeatherScape execute the python script: python weatherRequests.py and ensure swww-daemon is enabled!"
+python ./weatherRequests.py
