@@ -1,10 +1,12 @@
 #!/bin/bash
 
-
-
 #Please note that if either anything breaks during this installation
 #or your distro was not properly detected
 #Refer to the github readme for the dependencies and install them manually
+
+set -e 
+
+#Using set -e exits the code on any error, this ensures the last part executes if no error was detected
 
 
 cat << "EOF"
@@ -37,8 +39,7 @@ ubuntu() {
    cargo build --release
    sudo cp target/release/swww target/release/swww-daemon /usr/local/bin/
    sudo add-apt-repository ppa:longsleep/golang-backports && sudo apt update && sudo apt install golang-go
-   cd utils && go build .
-   cd ..
+   cd utils && go build . && cd ..
 }
 
 Installation() {
@@ -46,18 +47,16 @@ Installation() {
   sudo pacman -S --noconfirm python-pywal
   sudo pacman -S --noconfirm swww
   sudo pacman -S --noconfirm go
-  cd utils && go build .
-  cd ..
+  cd utils && go build . && cd ..
  elif [[ $1 = "fedora" ]]; then
    sudo dnf copr enable luisbocanegra/kde-material-you-colors
    sudo dnf copr enable materka/swww
    sudo dnf install python-pywal
    sudo dnf install swww
    sudo dnf install golang
-   cd utils && go build .
-   cd ..
+   cd utils && go build . && cd ..
  elif [[ $1 = "ubuntu" ]]; then
-   ubuntu
+   ubuntu 
  else 
    echo "No method found for provided distro"
  fi
@@ -92,5 +91,15 @@ else
   exit
 fi
 
-echo "To run WeatherScape execute the python script: python weatherRequests.py and ensure swww-daemon is enabled!"
-python ./weatherRequests.py
+clear
+
+echo "Installation finished..."
+
+read -p "Would you like to execute WeatherScape? [Y/N]: " executeWeatherScape
+
+if [[ "$executeWeatherScape" = "Y" || "$executeWeatherScape" = "y" ]]; then
+  echo "Executing WeatherScape..."
+  python ./weatherRequests.py
+else 
+  exit
+fi
