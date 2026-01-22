@@ -5,6 +5,7 @@ Dependencies to install:
     Charmbracelets log library
     golang
     pywal
+    maybe urwid if we were to make a tui dashboard)
     swww
     #2 modes, cli mode and rofi dmenu mode if you want
 """
