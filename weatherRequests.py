@@ -5,6 +5,7 @@ Dependencies to install:
     Charmbracelets log library
     golang
     pywal
+    add rich for logging
     maybe urwid if we were to make a tui dashboard)
     swww
     #2 modes, cli mode and rofi dmenu mode if you want
@@ -57,7 +58,7 @@ class main(ConfigInit):
                 raise InvalidStatus()
         else:
             pass
-
+    
     def classify(self, code: int, logging = False) -> str:
         if logging == True:
             self.Logging(
