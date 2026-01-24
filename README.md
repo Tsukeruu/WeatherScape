@@ -124,5 +124,7 @@
   - **Do not be surprised if the program returns an inaccurate weather result, its simply an issue regarding wttr.in**
 
   - **Hyprsnow is disabled by default due to performance prioritization, enable it in the config file and re run the program to submit the changes**
+
+  - **If for any case the changes were reverted when closing the terminal, its simply because the py wal colorscheme hasnt been set for the terminal**
     
   </details> 
