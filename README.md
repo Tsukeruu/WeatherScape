@@ -2,7 +2,7 @@
   - **WeatherScape aims to enhance your experience as a wayland user, by providing you with a cozy setup that matches the weather**
 
   https://github.com/user-attachments/assets/c5c9ac89-2792-427c-ad8d-a8adba2992ed
-
+  
   - **The above video shows the demo, as seen weatherscape has generated a theme that matches the local weather, currently where i am, its foggy**
   - **WeatherScape proceeded to configure my hyprlock, restart eww, send a notification everytime the program runs and the theme changes**
 
