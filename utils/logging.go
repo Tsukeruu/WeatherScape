@@ -27,7 +27,7 @@ func (v *validerrors) invalidlog() string {
 
 
 func (v *validerrors) FailedRequest() string {
-	v.msg = "Unable to make a GET request at wttr.in"
+	v.msg = "Unable to make a GET request at wttr.in [Likely due to an issue in wttr.in or your internet]"
 	log.Error(v.msg)
 	return v.msg
 }
