@@ -109,6 +109,38 @@
   </details>
 
   <details>
+  <summary>Installation</summary>
+
+  - **For most distros, the installation is quite simple, run the install script and wait for the script to detect your distro...**
+    
+  - **Supported distros are as follows:**  
+      - **Fedora and other red hat based distros**
+      - **Arch and endeavourOS other arch based distros**
+      - **Ubuntu**
+  - **For other distros refer to the dependencies and install them manually, dependencies wil lbe listed below...**
+
+  <details>
+  <summary>Installation</summary>
+    
+  - **⚠️ Please note that this installation below is meant for the people that have their distro listed above!**
+  ```bash
+    git clone https://github.com/Tsukeruu/WeatherScape && \
+      cd WeatherScape && \
+      ./INSTALL.sh
+  ```
+
+  - **For people who do not have their distros listed above please install these required dependencies**
+    - **Swww**
+    - **Pywal**
+    - **go**
+    - **Hyprlock (Though not usually required because its optional)**
+    - **Hyprsnow (If you wish to receive the snowy effect, however this is optional as well)**
+    - **Eww (Optional as well, if you use eww as a bar it will be optional)**
+  </details>
+  
+  </details>
+
+  <details>
   <summary>Disclaimer ⚠️</summary>
     
   - **WeatherScape runs solely on the internet connection, which works in a direct relationship**
