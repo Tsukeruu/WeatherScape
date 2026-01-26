@@ -105,7 +105,7 @@
       - **Fedora and other red hat based distros**
       - **Arch and endeavourOS other arch based distros**
       - **Ubuntu**
-  - **For other distros refer to the dependencies and install them manually, dependencies wil lbe listed below...**
+  - **For other distros refer to the dependencies and install them manually, dependencies will be listed below...**
 
     <details>
     <summary>Installation for listed distros ⬇️</summary>
