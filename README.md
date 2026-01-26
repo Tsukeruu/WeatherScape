@@ -119,25 +119,28 @@
       - **Ubuntu**
   - **For other distros refer to the dependencies and install them manually, dependencies wil lbe listed below...**
 
-  <details>
-  <summary>Installation</summary>
+    <details>
+    <summary>Installation for listed distros</summary>
     
-  - **⚠️ Please note that this installation below is meant for the people that have their distro listed above!**
-  ```bash
-    git clone https://github.com/Tsukeruu/WeatherScape && \
-      cd WeatherScape && \
-      ./INSTALL.sh
-  ```
-
-  - **For people who do not have their distros listed above please install these required dependencies**
-    - **Swww**
-    - **Pywal**
-    - **go**
-    - **Hyprlock (Though not usually required because its optional)**
-    - **Hyprsnow (If you wish to receive the snowy effect, however this is optional as well)**
-    - **Eww (Optional as well, if you use eww as a bar it will be optional)**
-  </details>
-  
+    - **⚠️ Please note that this installation below is meant for the people that have their distro listed above!**
+    ```bash
+      git clone https://github.com/Tsukeruu/WeatherScape && \
+        cd WeatherScape && \
+        ./INSTALL.sh
+    ```
+    </details>
+    <details>
+    <summary>Installation for non listed distros</summary>
+      
+      - **For people who do not have their distros listed above please install these required dependencies**
+        - **Swww**
+        - **Pywal**
+        - **go**
+        - **Hyprlock (Though not usually required because its optional)**
+        - **Hyprsnow (If you wish to receive the snowy effect, however this is optional as well)**
+        - **Eww (Optional as well, if you use eww as a bar it will be optional)**
+    </details>
+    
   </details>
 
   <details>
