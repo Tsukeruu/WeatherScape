@@ -123,6 +123,7 @@
     <summary>Installation for listed distros</summary>
     
     - **⚠️ Please note that this installation below is meant for the people that have their distro listed above!**
+    
     ```bash
       git clone https://github.com/Tsukeruu/WeatherScape && \
         cd WeatherScape && \
