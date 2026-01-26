@@ -73,18 +73,6 @@
     - **For snowy weathers, WeatherScape allows you to enable hyprsnow, this adds a nice aesthetic whenever its currently snowing outside**
         
   </details>
-
-  <details>
-  <summary>Installation</summary>
-    
-  - **Installation goes here**
-  </details>
-
-  <details>
-  <summary>Usage</summary>
-    
-  - **Usage goes here**
-  </details>
   
   <details>
   <summary>The purpose 🎯</summary>
@@ -109,7 +97,7 @@
   </details>
 
   <details>
-  <summary>Installation</summary>
+  <summary>Installation 📦</summary>
 
   - **For most distros, the installation is quite simple, run the install script and wait for the script to detect your distro...**
     
@@ -120,7 +108,7 @@
   - **For other distros refer to the dependencies and install them manually, dependencies wil lbe listed below...**
 
     <details>
-    <summary>Installation for listed distros</summary>
+    <summary>Installation for listed distros ⬇️</summary>
     
     - **⚠️ Please note that this installation below is meant for the people that have their distro listed above!**
     
@@ -131,7 +119,7 @@
     ```
     </details>
     <details>
-    <summary>Installation for non listed distros</summary>
+    <summary>Installation for non listed distros ⚙️</summary>
       
       - **For people who do not have their distros listed above please install these required dependencies**
         - **Swww**
@@ -142,6 +130,17 @@
         - **Eww (Optional as well, if you use eww as a bar it will be optional)**
     </details>
     
+  </details>
+
+
+  <details>
+  <summary>Usage 🧠</summary>
+    
+  - **After installation, cd into weatherscape and run the python script, (not in the utils dir)**
+  - ```bash
+    cd WeatherScape && python weatherRequests.py
+    ```
+    **For any errors please refer to the issues tab and ill gladly guide you on how to debug**
   </details>
 
   <details>
