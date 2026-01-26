@@ -1,6 +1,6 @@
 [General]
-Eww_Bar_Restart = true
-Hyprlock_Set = true
+Eww_Bar_Restart = false
+Hyprlock_Set = false
 Send_Notification = true
 
 [Snow]
