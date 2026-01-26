@@ -126,7 +126,7 @@
         - **Pywal**
         - **go**
         - **Hyprlock (Though not usually required because its optional)**
-        - **Hyprsnow (If you wish to receive the snowy effect, however this is optional as well)**
+        - **Hyprsnow (If you wish to receive the snowy effect, however this is optional as well, exclusive to hyprland users)**
         - **Eww (Optional as well, if you use eww as a bar it will be optional)**
     </details>
     
