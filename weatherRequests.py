@@ -161,6 +161,8 @@ class main(ConfigInit):
                 "Error"
             )
 
+    #Manage this more efficiently by adding each role to its function
+
     def setWallpaper(self, logging: bool = False) -> str:
         self._wallpaperManager: str = self.decidePaperSwww()
         self.selectedWallpaper: str = self.returnRandomWallpaper(True)
