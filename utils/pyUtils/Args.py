@@ -1,20 +1,69 @@
 from dataclasses import dataclass
+from .Exceptions import UnknownType
+
 import argparse
 
 @dataclass
 class Args:
-    _parser = argparse.ArgumentParser(
+    _parser: argparse.ArgumentParser = argparse.ArgumentParser(
             description="A program that changes your hyprland/wayland setup regarding the weather",
             allow_abbrev=False
         )
 
+    def add_args(
+            self,
+            shortcut: str,
+            name: str, 
+            required: bool,
+            _type: str,
+            action: str,
+            group: self._parser.add_mutually_exclusive_group=None,
+            _help: str = "A default arg!")-> None:
+
+        if not group:
+            if _type == "bool":
+                self._parser.add_argument(
+                    shortcut,
+                    name,
+                    help=_help,
+                    required=required,
+                    action=action
+                )
+            elif _type == "regular":
+                self._parser.add_argument(
+                    shortcut,
+                    name,
+                    help=_help,
+                    required=required,
+                    action=action
+                )
+            else:
+                raise UnknownType()
+
+        elif group:
+            group.add_argument(
+                shortcut,
+                name,
+                help=_help,
+                required=required,
+                action=action
+              )
+            
+            
+
     def __post_init__(self): 
-         self._parser.add_argument(
-            "-q", 
-            "--quiet",
-            help="Enables quiet mode, no logging", 
-            required=False, #doesnt require on startup
-            action="store_true" #store_true means its false if not specified
-        )
-         self._args = self._parser.parse_args()
+         #self._parser.add_argument(
+         #   "-q", 
+         #   "--quiet",
+         #   help="Enables quiet mode, no logging", 
+         #   required=False, #doesnt require on startup
+         #   action="store_true" #store_true means its false if not specified
+         #)
+         
+         self._wallpaperGroup: Any = self._parser.add_mutually_exclusive_group(required=True)
+        
+         self.add_args("-q","--quiet",False,"bool","store_true", _help="Enables quiet mode, no logging")
+         self.add_args("-sw", "--swww", False, "bool", "store_true", group=self._wallpaperGroup, _help="Use the swww wallpaper manager")
+         self.add_args("-hyp", "--hyprpaper", False, "bool", "store_true", group=self._wallpaperGroup, _help="Use the hyprpaper wallpaper manager") 
+         self._args: Any = self._parser.parse_args()
 

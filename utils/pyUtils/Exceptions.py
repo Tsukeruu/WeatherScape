@@ -37,3 +37,10 @@ class InternalError(Exception):
             message = "An internal error occured in wttr.in.. dont worry this isnt your problem :)"
 
         super().__init__(message)
+
+class UnknownType(Exception):
+    def __init__(self, message: str = None) -> None:
+        if message == None:
+            message = "The type of arg wasnt specified for argparse!"
+
+        super().__init__(message)
