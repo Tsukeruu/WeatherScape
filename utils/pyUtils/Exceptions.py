@@ -23,10 +23,10 @@ class WalFailed(Exception):
 
         super().__init__(message)
 
-class SwwwFailed(Exception):
-    def __init__(self, message: str = None) -> None:
+class WallpaperFailed(Exception):
+    def __init__(self, wallpaperManager: str = None, message: str = None) -> None:
         if not message:
-            message = "Swww failed to set the wallpaper!"
+            message = f"Failed to set the wallpaper! using wallpaperManager: {wallpaperManager}"
 
         super().__init__(message)
 

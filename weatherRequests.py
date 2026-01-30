@@ -13,7 +13,7 @@ Dependencies to install:
 
 from typing import List, Generic, TypeVar, Dict, Any, Union, ClassVar, Set
 from dataclasses import dataclass
-from utils.pyUtils.Exceptions import InvalidCode, InvalidStatus, ZeroWallpapers, SwwwFailed, WalFailed, InternalError
+from utils.pyUtils.Exceptions import InvalidCode, InvalidStatus, ZeroWallpapers, WallpaperFailed, WalFailed, InternalError
 from utils.pyUtils.Dataclasses import ConfigInit
 import requests
 import os
@@ -148,28 +148,53 @@ class main(ConfigInit):
             pass
         self.Randomizedwallpaper: str = random.choice(self.currentFiles)
         return self.Randomizedwallpaper
+    
+    def decidePaperSwww(self) -> str:
+        if self._args.hyprpaper:
+            return "hyprpaper"
+        elif self._args.swww:
+            return "swww"
+        else:
+            self.Logging(
+                "Custom",
+                "No arguement were passed!",
+                "Error"
+            )
 
-    def setWallpaper(self, logging: bool = False, wallpapermnger: str = "swww") -> str: 
+    def setWallpaper(self, logging: bool = False) -> str:
+        self._wallpaperManager: str = self.decidePaperSwww()
+        self.selectedWallpaper: str = self.returnRandomWallpaper(True)
+        randomizedWalPath: str = f"{self._currentDir}/wallpapers/{self.Condition}/{self.selectedWallpaper}"
+
         if logging == True:
             self.Logging(
                     "Custom",
-                    f"Using {wallpapermnger} to set the wallpaper...", 
+                    f"Using {self._wallpaperManager} to set the wallpaper...", 
                     "Debug"
                 )
         else:
             pass
-        self.selectedWallpaper: str = self.returnRandomWallpaper(True)
-        randomizedWalPath: str = f"{self._currentDir}/wallpapers/{self.Condition}/{self.selectedWallpaper}"
-
-        self.SwwwExitCode: int = subprocess.run(
-                f"{wallpapermnger} img {randomizedWalPath} --transition-type {self._swww_transition} --transition-duration {self._swww_duration}",
+        if self._wallpaperManager == "swww":
+            self.ExitCode: int = subprocess.run(
+                f"{self._wallpaperManager} img {randomizedWalPath} --transition-type {self._swww_transition} --transition-duration {self._swww_duration}",
                 shell=True
             ).returncode
-
-        if self.SwwwExitCode != 0:
-            raise SwwwFailed() 
+        elif self._wallpaperManager == "hyprpaper":
+            self.ExitCode: int = subprocess.run(
+                f"sh {self._currentDir}/utils/ShellUtil.sh hyprpaper {self.selectedWallpaper} {self.Condition} {self._currentDir}",
+                shell=True
+            ).returncode 
         else:
             pass
+
+        if self.ExitCode != 0:
+            raise WallpaperFailed(wallpaperManager=self._wallpaperManager,message=None)
+        else:
+            self.Logging(
+                "Custom",
+                "Successfuly changed the wallpaper",
+                "Info"
+            )
         return randomizedWalPath
 
     def applyWal(self, logging: bool = False) -> None:
@@ -192,10 +217,10 @@ class main(ConfigInit):
 
         try:
             randomizedWalPath_: str = self.setWallpaper(True) 
-        except SwwwFailed as g:
+        except WallpaperFailed as g:
             self.Logging(
                     "Custom",
-                    "Unable to run swww! Is the daemon running?",
+                    f"Unable to set wallpaper using wallpaper manager: {self._wallpaperManager}",
                     "Error"
                 )
 

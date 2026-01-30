@@ -1,4 +1,5 @@
 hyprLock="$HOME/.config/hypr/hyprlock.conf"
+hyprPaper="$HOME/.config/hypr/hyprpaper.conf"
 
 main() {
   sed -i -e "s|path = .*|path = $currentDir/wallpapers/$condition/$chosenImage|" $hyprLock
@@ -29,4 +30,13 @@ if [[ $1 = "hyprSnow-disable" ]]; then
   else 
     pkill hyprsnow
   fi
+fi
+
+if [[ $1 = "hyprpaper" ]]; then
+  chosenImage=$2
+  condition=$3
+  currentDir=$4
+  sed -i -e "s|preload = .*|preload = $currentDir/wallpapers/$condition/$chosenImage|" $hyprPaper
+  sed -i -e "s|path = .*|path = $currentDir/wallpapers/$condition/$chosenImage|" $hyprPaper
+  pkill hyprpaper && hyprpaper &
 fi

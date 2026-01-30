@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from typing import ClassVar, Dict, Set, List, Callable, Any
-from utils.pyUtils.Exceptions import InvalidCode, InvalidStatus, ZeroWallpapers, SwwwFailed, WalFailed, InternalError
+from utils.pyUtils.Exceptions import InvalidCode, InvalidStatus, ZeroWallpapers, WallpaperFailed, WalFailed, InternalError
 from pathlib import Path
 from .Args import Args
 import configparser
