@@ -159,9 +159,7 @@ class main(ConfigInit):
                 "Custom",
                 "No arguement were passed!",
                 "Error"
-            )
-
-    #Manage this more efficiently by adding each role to its function
+            ) 
 
     def setWallpaper(self, logging: bool = False) -> str:
         self._wallpaperManager: str = self.decidePaperSwww(self._args)
