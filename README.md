@@ -5,7 +5,7 @@
 
   https://github.com/user-attachments/assets/c5c9ac89-2792-427c-ad8d-a8adba2992ed
   
-  - **The above video shows the demo, as seen weatherscape has generated a theme that matches the local weather, currently where i am, its foggy**
+  - **The above video shows the demo, as seen weatherscape has generated a theme that matches the local weather, currently where i am, its sunny and clear**
   - **WeatherScape proceeded to configure my hyprlock, restart eww, send a notification everytime the program runs and the theme changes**
 
   - **For further evidence, here is a picture taken from when the demo was recorded**
@@ -13,9 +13,7 @@
   <details>
   <summary>Evidence</summary>
   
-  ![IMG](Preview/preview-evidence.jpg)
-
-  - **Cozy isnt it?**
+  ![IMG](Preview/preview-evidence2.jpg)
     
   </details>
   
