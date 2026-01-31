@@ -149,10 +149,10 @@ class main(ConfigInit):
         self.Randomizedwallpaper: str = random.choice(self.currentFiles)
         return self.Randomizedwallpaper
     
-    def decidePaperSwww(self) -> str:
-        if self._args.hyprpaper:
+    def decidePaperSwww(self, args: Any) -> str:
+        if args.hyprpaper:
             return "hyprpaper"
-        elif self._args.swww:
+        elif args.swww:
             return "swww"
         else:
             self.Logging(
@@ -164,7 +164,7 @@ class main(ConfigInit):
     #Manage this more efficiently by adding each role to its function
 
     def setWallpaper(self, logging: bool = False) -> str:
-        self._wallpaperManager: str = self.decidePaperSwww()
+        self._wallpaperManager: str = self.decidePaperSwww(self._args)
         self.selectedWallpaper: str = self.returnRandomWallpaper(True)
         randomizedWalPath: str = f"{self._currentDir}/wallpapers/{self.Condition}/{self.selectedWallpaper}"
 
