@@ -26,18 +26,29 @@
     
   ![Demo](Preview/help.png)
 
-  
   - **⚠️ More arguements are yet to come as more functionality is included**
 
-  ![Demo](Preview/preview-working-program.png)
+  ![Demo](Preview/preview-working-program-alone.png)
   
-  - **WeatherScape comes with beautiful logging that comes from charmbracelets' log library**
+  - **WeatherScape runs properly if either wallpaper managers: swww and hyprpaper, were specified**
 
-  ![Demo](Preview/preview-working-wallpaper.png)
+  ![Demo](Preview/preview-working-program-swww.png)
   
-  - **WeatherScape sets the wallpaper using Swww, this image corresponds to the image above**
+  - **In this example. the swww wallpaper manager was used**
     
   - **As seen, pywal is also applied (if installed)**
+
+  ![Demo](Preview/preview-working-wallpaper-swww.png)
+  
+  - **This image corresponds to the output above, this is a direct result of swww**
+
+  ![Demo](Preview/preview-working-program-hyprpaper.png)
+  
+  - **In this example. the hyprpaper wallpaper manager was used**
+
+  ![Demo](Preview/preview-working-wallpaper-hyprpaper.png)
+  
+  - **This image corresponds to the output above, this is a direct result of hyprpaper**
 
   ![Demo](Preview/preview-working-program-quiet.png)
   
@@ -45,15 +56,18 @@
     
   - **⚠️ Errors may interrupt!**
 
-  ![Demo](Preview/preview-working-wallpaper2.png)
+  ![Demo](Preview/preview-working-wallpaper-quiet.png)
   
-  - **Here is a preview of how it looks from the quiet mode... This image corresponds to the image above**
+  - **Using quiet mode does not alter the outcome!**
 
   ![Demo](Preview/cava_visualizer.png)
   
-  - **A neat demonstration of how the theme is applied using the cava visualizer**
+  - **A neat demonstration of how the pywal applies the theme exemplified by the cava visualizer**
 
   - **The previous examples show how WeatherScape sets the theme according to the weather, in my case my weather at that time was Sunny, and so the wallpapers returned emit that vibe**
+
+  ![Demo](Preview/preview-evidence2.jpg)
+
   </details>
 
 
