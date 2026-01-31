@@ -51,14 +51,17 @@ class Args:
             
         else:
             pass
-
-    def __post_init__(self):
+    
+    def parse_args(self) -> None:
          #Exclusive group means both are required but one is needed for it to execute
          self._wallpaperGroup: Any = self._parser.add_mutually_exclusive_group(required=True) 
          self.add_args("-q","--quiet",False,"bool","store_true", _help="Enables quiet mode, no logging")
 
          #We set both swww and hyprpaper to false simply because we already defined a exclusive group and set required to true there
          self.add_args("-sw", "--swww", False, "bool", "store_true", group=self._wallpaperGroup, _help="Use the swww wallpaper manager")
-         self.add_args("-hyp", "--hyprpaper", False, "bool", "store_true", group=self._wallpaperGroup, _help="Use the hyprpaper wallpaper manager") 
+         self.add_args("-hyp", "--hyprpaper", False, "bool", "store_true", group=self._wallpaperGroup, _help="Use the hyprpaper wallpaper manager")
+
+    def __post_init__(self):
+         self.parse_args()
          self._args: Any = self._parser.parse_args()
 
