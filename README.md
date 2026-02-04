@@ -1,5 +1,4 @@
 # WeatherScape ☁️
-  *The readme will be updated soon to include the newest updates and features*
   
   - **WeatherScape aims to enhance your experience as a wayland user, by providing you with a cozy setup that matches the weather**
 
