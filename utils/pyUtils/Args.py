@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from .Exceptions import UnknownType
+from typing import Callable, Any
 
 import argparse
 
