@@ -22,7 +22,7 @@
   <details>
   <summary>Preview 👀</summary>
 
-  https://github.com/user-attachments/assets/c5c9ac89-2792-427c-ad8d-a8adba2992ed
+  [![IMG](Preview/preview-demo.mp4)](https://github.com/user-attachments/assets/22e69dc9-a539-4c22-b152-a85940f6d533)
     
   ![Demo](Preview/help.png)
 
