@@ -22,8 +22,6 @@ import subprocess
 import configparser
 import sys
 
-T = TypeVar("T")
-
 """
 A valid way to write the logging modes is this:
    severities include but are not limited to: Info, Error, Warn, Debug (limited options which havent been added are Fatal and more)
@@ -34,7 +32,7 @@ A valid way to write the logging modes is this:
 """
 
 class main(ConfigInit):
-    def Logging(self, Status: T, CustomMsg: str = None, Severity: str = None) -> None:
+    def Logging(self, Status: str, CustomMsg: str = None, Severity: str = None) -> None:
         if not self._args.quiet:
             if Status == "Success" and (isinstance(Status, str)):
                 subprocess.run(
